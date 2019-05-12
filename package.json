@@ -1,0 +1,19 @@
+{
+  "name": "daily-scroll-backend",
+  "version": "1.0.0",
+  "description": "HOME PAGE:  ----------",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gfruin/Daily-Scroll-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gfruin/Daily-Scroll-Backend/issues"
+  },
+  "homepage": "https://github.com/Gfruin/Daily-Scroll-Backend#readme"
+}
