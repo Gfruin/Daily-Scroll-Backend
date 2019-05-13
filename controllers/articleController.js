@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Article = require('../models/article')
+const User = require('../models/user')
 const superagent = require('superagent')
 // const apiKey = require('./apiKey')
 
@@ -33,6 +34,16 @@ router.post('/', async (req,res,next) => {
 		res.json({
 			status: 200,
 			data: createdArticle
+		})
+		const foundUser = await User.findById(req.session.userDBId)
+		console.log(foundUser, 'here is the user');
+		foundUser.articles.push(createdArticle);
+		const savedUser = await foundUser.save((err) => {
+			console.log(savedUser, 'saved a user');
+			res.json({
+				status: 200,
+				data: savedUser
+			})
 		})
 
 	} catch(err) {
