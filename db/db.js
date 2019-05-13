@@ -18,6 +18,6 @@ mongoose.connection.on('disconnected', () => {
 })
 
 //connection.on error
-mongoose.connnection.on('error', (err) => {
+mongoose.connection.on('err', (err) => {
 	console.log('mongoose hit an error', err);
 })	
