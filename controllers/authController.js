@@ -22,13 +22,15 @@ router.get('/login', async (req,res,next) => {
 
 router.post('/register', async (req,res,next) => {
 	console.log('you are hitting the register route');
-	const password = req.body.password;
-	const passwordHash = bcrypt.hashSync(password, bcrypt.genSalt(10));
-	const userDBEntry = {};
-	userDBEntry.username = req.body.username;
-	userDBEntry.password = passwordHash
 
 	try {
+		const password = req.body.password;
+		console.log(password);
+		const passwordHash = await bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+		console.log(passwordHash);
+		const userDBEntry = {};
+		userDBEntry.username = req.body.username;
+		userDBEntry.password = passwordHash
 		const createdUser = await User.create(userDBEntry);
 		console.log(createdUser);
 		req.session.logged = true;
@@ -43,3 +45,8 @@ router.post('/register', async (req,res,next) => {
 		next(err)
 	}
 })
+
+
+
+
+module.exports = router;
