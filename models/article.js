@@ -11,7 +11,8 @@ const articleSchema = new mongoose.Schema({
 	health: Boolean,
 	science: Boolean,
 	sports: Boolean,
-	technology: Boolean
+	technology: Boolean,
+	local: Boolean
 })
 //define the model
 const Article = new mongoose.model('Post', postSchema)
