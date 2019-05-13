@@ -1,9 +1,11 @@
 //require mongoose
 const mongoose = require('mongoose');
 //make connection string?
-// const connectionString = 'mongodb://localhost/'
+
+const connectionString = 'mongodb://localhost/news'
+console.log(process.env);
 //connect mongoose
-mongoose.connect('mongodb://localhost/news', {
+mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useFindAndModify: false

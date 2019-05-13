@@ -94,8 +94,22 @@ router.put('/:id', async (req,res,next) => {
 	} catch(err) {
 		next(err)
 	}
-})
+}) // end article update route 
 
+
+//fetch the news api data by search term
+
+router.get('/news-everything/:searchTerm', async (req,res,next) => {
+	try {
+	const allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=8904407fd4584d85a0f3a56781e369ff`) 
+	res.json({
+		status: 200,
+		data: JSON.parse(data.text)
+	})
+} catch(err) {
+	next(err)
+}
+})
 
 
 

@@ -6,6 +6,13 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const session = require('express-session');
 
+require('dotenv').config()
+
+
+const PORT = process.env.PORT
+
+const API_KEY = process.env.API_KEY
+
 require('./db/db');
 
 //middleware here
