@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Gfruin/Daily-Scroll-Backend#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
