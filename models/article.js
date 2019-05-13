@@ -6,13 +6,14 @@ const articleSchema = new mongoose.Schema({
 	description: String,
 	comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
 	user: {type: mongooseSchema.Types.ObjectId, ref: "User"},
+	category: {
 	business: Boolean,
 	entertainment: Boolean,
 	health: Boolean,
 	science: Boolean,
 	sports: Boolean,
 	technology: Boolean,
-	local: Boolean
+	local: Boolean }
 })
 //define the model
 const Article = new mongoose.model('Post', postSchema)
