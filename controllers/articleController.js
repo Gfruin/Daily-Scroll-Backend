@@ -79,7 +79,24 @@ router.delete('/:id', async (req,res,next) => {
 	} catch(err) {
 		next(err)
 	}
+}) //end of delete route
+
+//article update route
+
+router.put('/:id', async (req,res,next) => {
+	try {
+		const updatedArticle = await Article.findByIdAndUpdate(req.params.id, req.body, {new: true})
+		res.json({
+			status: 200,
+			data: updatedArticle
+		})
+
+	} catch(err) {
+		next(err)
+	}
 })
+
+
 
 
 
