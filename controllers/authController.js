@@ -44,7 +44,52 @@ router.post('/register', async (req,res,next) => {
 	} catch(err) {
 		next(err)
 	}
+}) //end of registration route
+
+//login route
+
+router.post('/login', async (req,res,next) => {
+	try{
+		const foundUser = await User.findOne({'username': req.body.username});
+		if(foundUser) {
+			if(bcrypt.compareSync(req.body.password, foundUser.password) === true) {
+				req.session.message = '';
+				req.session.logged = true;
+				req.session.userDBId = foundUser._id;
+				req.session.username = foundUser.username
+				console.log(req.session, 'You are successfully logged in!');
+				res.json({
+					status: 200,
+					data: foundUser
+				})
+			} else {
+				req.session.message = 'Username or password is incorrect!'
+				res.json({
+					status: 200,
+					data: req.session.message
+				})
+			}
+		}
+
+	} catch(err) {
+		next(err)
+
+	}
+}) //end of login route
+
+router.get('/logout', async (req,res,next) => {
+	req.session.destroy((err) => {
+		if(err){
+			next(err)
+		} else {
+			res.json({
+				status: 200,
+				data: 'logged out!'
+			})
+		}
+	})
 })
+
 
 
 
