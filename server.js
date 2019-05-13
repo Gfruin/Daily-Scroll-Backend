@@ -33,7 +33,7 @@ const authController = require('./controllers/authController');
 const commentController = require('./controllers/commentController');
 const userController = require('./controllers/userController');
 
-// app.use('/api/v1/articles', articleController)
+app.use('/api/v1/articles', articleController)
 // app.use('/auth', authController)
 app.use('/api/v1/user', userController)
 // app listener here

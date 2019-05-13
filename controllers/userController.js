@@ -93,7 +93,7 @@ router.put('/:id', async (req,res,next) => {
 	} catch(err) {
 		next(err)
 	}
-})
+}) //end of user update route
 
 
 
