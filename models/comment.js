@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //define the comment schema
 const commentSchema = new mongoose.Schema({
 	date: {
-		type: Data,
+		type: Date,
 		default: Date.now
 	},
 	text: {
@@ -13,6 +13,6 @@ const commentSchema = new mongoose.Schema({
 	user: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 })
 //define the model
-const Comment = new.mongoose.model('Comment', commentSchema)
+const Comment = new mongoose.model('Comment', commentSchema)
 //export the module
 module.export = Comment;

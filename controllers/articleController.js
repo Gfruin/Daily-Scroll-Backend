@@ -26,8 +26,8 @@ router.post('/', async (req,res,next) => {
 	const newArticle = {
 		title: req.body.title,
 		description: req.body.description,
-		category: req.body.category
-		// user: req.session.username
+		category: req.body.category,	
+		user: req.session.username
 	}
 	try {
 		const createdArticle = await Article.create(newArticle)
