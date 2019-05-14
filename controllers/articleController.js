@@ -5,7 +5,7 @@ const Article = require('../models/article')
 const User = require('../models/user')
 const superagent = require('superagent')
 // const apiKey = require('./apiKey')
-
+const API_KEY = process.env.API_KEY
 // article index route
 
 router.get('/', async (req,res,next) => {
@@ -112,7 +112,7 @@ router.put('/:id', async (req,res,next) => {
 
 router.get('/news-everything/:searchTerm', async (req,res,next) => {
 	try {
-	let allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=8904407fd4584d85a0f3a56781e369ff`)
+	let allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=${API_KEY}`)
 	console.log(allData);
 
 	allData = JSON.parse(allData.text)
@@ -138,7 +138,7 @@ router.get('/news-everything/:searchTerm', async (req,res,next) => {
 
 router.get('/news-country/:searchTerm', async (req,res,next) => {
 	try {
-		const countryNews = await superagent.get(`https://newsapi.org/v2/top-headlines?country=${req.params.search}&apiKey=8904407fd4584d85a0f3a56781e369ff`)
+		const countryNews = await superagent.get(`https://newsapi.org/v2/top-headlines?country=${req.params.search}&apiKey=${API_KEY}`)
 		res.json({
 			status: 200,
 			data: JSON.parse(data.text)
