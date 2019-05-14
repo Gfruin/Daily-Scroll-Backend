@@ -112,15 +112,45 @@ router.put('/:id', async (req,res,next) => {
 
 router.get('/news-everything/:searchTerm', async (req,res,next) => {
 	try {
-	const allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=8904407fd4584d85a0f3a56781e369ff`) 
+	let allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=8904407fd4584d85a0f3a56781e369ff`)
+	console.log(allData);
+
+	allData = JSON.parse(allData.text)
+	const allDataSearches = await allData.articles.map(article => {
+		return {
+			author: article.author,
+			title: article.title,
+			url: article.url,
+			source: article.source.name,
+			description: article.description
+		}
+	}) 
 	res.json({
 		status: 200,
-		data: JSON.parse(data.text)
+		data: allDataSearches
 	})
 } catch(err) {
 	next(err)
 }
 })
+
+//fetch news from the news api by top-headlines: country
+
+router.get('/news-country/:searchTerm', async (req,res,next) => {
+	try {
+		const countryNews = await superagent.get(`https://newsapi.org/v2/top-headlines?country=${req.params.search}&apiKey=8904407fd4584d85a0f3a56781e369ff`)
+		res.json({
+			status: 200,
+			data: JSON.parse(data.text)
+		})
+	} catch(err) {
+		next(err)
+	}
+})
+
+
+
+
 
 
 

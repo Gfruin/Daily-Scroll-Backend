@@ -3,7 +3,6 @@ const router = express.Router();
 const Article = require('../models/article')
 const User = require('../models/user')
 const Comment = require('../models/comment')
-
 //need to build a create route that creates comments and assigns 
 //them to their specific user with a specific article
 

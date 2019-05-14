@@ -43,6 +43,7 @@ const userController = require('./controllers/userController');
 app.use('/api/v1/articles', articleController)
 app.use('/api/v1/auth', authController)
 app.use('/api/v1/user', userController)
+app.use('/api/v1/comments', commentController)
 // app listener here
 
 app.listen(process.env.PORT || 9000, () => {
