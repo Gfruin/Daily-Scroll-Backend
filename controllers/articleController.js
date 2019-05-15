@@ -61,13 +61,13 @@ router.get('/:id', async (req,res,next) => {
 	try {
 		const foundArticle = await 
 		Article.findById(req.params.id)
-		// Article.populate({ 
-		// 	path: 'comments',
-		// 	populate: {
-		// 		path: 'user'
-		// 	}
+		Article.populate({ 
+			path: 'comments',
+			populate: {
+				path: 'user'
+			}
 
-		// })
+		})
 		res.json({
 			status: 200,
 			data: foundArticle
