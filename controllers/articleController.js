@@ -151,21 +151,38 @@ router.get('/news-everything/:searchTerm', async (req,res,next) => {
 
 //fetch news from the news api by top-headlines: country
 
-router.get('/news-country/:searchTerm', async (req,res,next) => {
-	try {
-		const countryNews = await superagent.get(`https://newsapi.org/v2/top-headlines?country=${req.params.search}&apiKey=${API_KEY}`)
-		res.json({
-			status: 200,
-			data: JSON.parse(data.text)
-		})
-	} catch(err) {
-		next(err)
-	}
+router.get('/news-country/:searchTerm', async (req, res, next) => {
+    try {
+        let countryNews = await superagent.get(`https://newsapi.org/v2/top-headlines?country=${req.params.search}&apiKey=${API_KEY}`)
+        console.log(countryNews);
+        countryNews = JSON.parse(countryNews.text)
+        const countryNewsSearches = await countryNews.articles.map(article => {
+            return {
+                author: article.author,
+                title: article.title,
+                url: article.url,
+                source: article.source.name,
+                description: article.description
+            }
+        })
+        res.json({
+            status: 200,
+            data: countryNewsSearches
+        })
+    } catch (err) {
+        next(err)
+    }
 })
 
+// router.get('/news-source/:searchTerm', async (req,res,next) => {
+// 	try {
+// 	let allData = await superagent.get(`https://newsapi.org/v2/top-headlines?sources=${req.params.search}&apiKey=${API_KEY}`)
+// 	console.log(allData);
 
-
-
+// router.get('/news-everything/:searchTerm', async (req,res,next) => {
+// 	try {
+// 	let allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=${API_KEY}`)
+// 	console.log(allData);
 
 
 
