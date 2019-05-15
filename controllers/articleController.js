@@ -23,28 +23,42 @@ router.get('/', async (req,res,next) => {
 
 router.post('/', async (req,res,next) => {
 	console.log('this is the article create route');
-	const newArticle = {
-		title: req.body.title,
-		description: req.body.description,
-		category: req.body.category,	
-		user: req.session.username
-	}
 	try {
-		console.log(newArticle, 'this is the newArticle');
-		const createdArticle = await Article.create(newArticle)
-		res.json({
-			status: 200,
-			data: createdArticle
-		})
-		console.log(createdArticle);
+	
+		// find user and store user's data in variable foundUser 
+		// via req.session.userDbId or w/e
 		const foundUser = await User.findById(req.session.userDBId)
 		console.log(foundUser, 'here is the user');
+
+		const newArticle = {
+			title: req.body.title,
+			description: req.body.description,
+			category: req.body.category,	
+			user: foundUser
+		}
+	
+		console.log(newArticle, 'this is the newArticle');
+		const createdArticle = await Article.create(newArticle)
+		// res.json({
+		// 	status: 200,
+		// 	data: createdArticle
+		// })
+		console.log("this is the created article: ", createdArticle);
+		
 		foundUser.articles.push(createdArticle);
+		
 		const savedUser = await foundUser.save((err) => {
+			
 			console.log(savedUser, 'saved a user');
+			
+			const dataToSend = {
+				newArticle: createdArticle,
+				updatedUser: savedUser
+			}
+
 			res.json({
 				status: 200,
-				data: savedUser
+				data: dataToSend
 			})
 		})
 
@@ -60,14 +74,13 @@ router.post('/', async (req,res,next) => {
 router.get('/:id', async (req,res,next) => {
 	try {
 		const foundArticle = await 
-		Article.findById(req.params.id)
-		Article.populate({ 
-			path: 'comments',
-			populate: {
-				path: 'user'
-			}
-
-		})
+			Article.findById(req.params.id).populate({
+				path: 'comments',
+				populate: {
+					path: 'user'
+				}				
+			})
+		
 		res.json({
 			status: 200,
 			data: foundArticle
