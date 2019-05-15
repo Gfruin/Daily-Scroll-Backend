@@ -63,6 +63,7 @@ router.post('/login', async (req,res,next) => {
 					data: foundUser
 				})
 			} else {
+				console.log('the user was not found');
 				req.session.message = 'Username or password is incorrect!'
 				res.json({
 					status: 200,
@@ -73,7 +74,6 @@ router.post('/login', async (req,res,next) => {
 
 	} catch(err) {
 		next(err)
-
 	}
 }) //end of login route
 

@@ -30,11 +30,13 @@ router.post('/', async (req,res,next) => {
 		user: req.session.username
 	}
 	try {
+		console.log(newArticle, 'this is the newArticle');
 		const createdArticle = await Article.create(newArticle)
 		res.json({
 			status: 200,
 			data: createdArticle
 		})
+		console.log(createdArticle);
 		const foundUser = await User.findById(req.session.userDBId)
 		console.log(foundUser, 'here is the user');
 		foundUser.articles.push(createdArticle);
