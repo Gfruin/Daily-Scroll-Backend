@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-	origin: 'http://localhost:3000',
+	origin: process.env.REACT_CLIENT_URL,
 	credentials: true,
 	optionsSuccessStatus: 200
 }
@@ -46,8 +46,8 @@ app.use('/api/v1/user', userController)
 app.use('/api/v1/comments', commentController)
 // app listener here
 
-app.listen(process.env.PORT || 9000, () => {
-	console.log('listening on PORT 9000');
+app.listen(process.env.PORT, () => {
+	console.log('listening on PORT ' + process.env.PORT);
 })
 
 
