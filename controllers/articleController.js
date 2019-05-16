@@ -127,11 +127,16 @@ router.put('/:id', async (req,res,next) => {
 
 router.get('/news-everything/:searchTerm', async (req,res,next) => {
 	try {
-	let allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.search}&apiKey=${API_KEY}`)
-	console.log(allData);
+		
 
-	allData = JSON.parse(allData.text)
-	const allDataSearches = await allData.articles.map(article => {
+
+		let allData = await superagent.get(`https://newsapi.org/v2/everything?q=${req.params.searchTerm}&apiKey=${API_KEY}`)
+		
+		console.log(allData);
+
+		allData = JSON.parse(allData.text)
+
+		const allDataSearches = await allData.articles.map(article => {
 		return {
 			author: article.author,
 			title: article.title,
