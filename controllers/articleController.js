@@ -142,7 +142,8 @@ router.get('/news-everything/:searchTerm', async (req,res,next) => {
 			title: article.title,
 			url: article.url,
 			source: article.source.name,
-			description: article.description
+			description: article.description,
+			image: article.urlToImage
 		}
 	}) 
 	res.json({
